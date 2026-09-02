@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bt7mkd36f3ih4"]
+
+[ext_resource type="Texture2D" uid="uid://c3gr10l7my3r1" path="res://sprites/Spaceship.png" id="1_merdl"]
+
+[node name="Player" type="CharacterBody2D" unique_id=1657702218]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=34525177]
+texture = ExtResource("1_merdl")
