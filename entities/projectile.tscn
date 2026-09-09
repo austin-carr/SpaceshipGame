@@ -17,3 +17,6 @@ shape = SubResource("CapsuleShape2D_2i1rd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=66831569]
 texture = ExtResource("2_jnjrb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1556077387]
+rect = Rect2(-5, -3, 12, 6)

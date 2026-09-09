@@ -9,8 +9,54 @@ public partial class Player : CharacterBody2D
 	public float StopDistance { get; set; } = 5.0f;
 	[Export]
 	public float ScreenPadding { get; set; } = 32.0f; 
+	[Export]
+	public PackedScene ProjectileScene { get; set; }
+	[Export]
+	public float FireRate { get; set; } = 0.5f;
 	
-	//public const float JumpVelocity = -400.0f;
+	private Marker2D _muzzle;
+	private bool _canShoot = true;
+	private Timer _shootCooldownTimer;
+	
+	public override void _Ready()
+	{
+		_muzzle = GetNode<Marker2D>("MuzzleMarker2D");
+		
+		_shootCooldownTimer = new Timer();
+		_shootCooldownTimer.WaitTime = FireRate;
+		_shootCooldownTimer.OneShot = true;
+		_shootCooldownTimer.Timeout += () => _canShoot = true;
+		
+		AddChild(_shootCooldownTimer);
+	}
+	
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event.IsActionPressed("shoot") && _canShoot)
+		{
+			Shoot();
+		}
+	}
+	
+	private void Shoot()
+	{
+		if (ProjectileScene == null)
+		{
+			// TODO: Error
+			return;
+		}
+		
+		_canShoot = false;
+		_shootCooldownTimer.Start();
+		
+		Projectile projectileInstance = ProjectileScene.Instantiate<Projectile>();
+		projectileInstance.GlobalPosition = _muzzle.GlobalPosition;
+		
+		Vector2 spawnDirection = Vector2.Right.Rotated(GlobalRotation);
+		projectileInstance.Direction = spawnDirection;
+		
+		GetTree().CurrentScene.AddChild(projectileInstance);
+	}
 	
 	public override void _PhysicsProcess(double delta)
 	{
@@ -21,12 +67,10 @@ public partial class Player : CharacterBody2D
 		
 		if (MathF.Abs(deltaY) > StopDistance)
 		{
-			// Move up or down based on the sign of deltaY
 			velocity.Y = MathF.Sign(deltaY) * Speed;
 		}
 		else
 		{
-			// Stop moving if close enough
 			velocity.Y = 0;
 		}
 		
@@ -39,17 +83,12 @@ public partial class Player : CharacterBody2D
 
 		if (camera != null)
 		{
-			// 2. Get the size of the viewport (screen)
 			Vector2 viewportSize = GetViewportRect().Size;
-			
-			// Adjust for camera zoom if applicable
 			Vector2 viewSize = viewportSize / camera.Zoom;
-
-			// 3. Calculate top and bottom limits in global coordinates
+			
 			float cameraTop = camera.GlobalPosition.Y - (viewSize.Y / 2.0f);
 			float cameraBottom = camera.GlobalPosition.Y + (viewSize.Y / 2.0f);
-
-			// 4. Clamp the character's Y position within the limits (with padding)
+			
 			Vector2 clampedPosition = GlobalPosition;
 			clampedPosition.Y = Mathf.Clamp(
 				clampedPosition.Y, 
@@ -59,32 +98,5 @@ public partial class Player : CharacterBody2D
 
 			GlobalPosition = clampedPosition;
 		}
-
-		// Add the gravity.
-		//if (!IsOnFloor())
-		//{
-		//	velocity += GetGravity() * (float)delta;
-		//}
-
-		// Handle Jump.
-		//if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-		//{
-		//	velocity.Y = JumpVelocity;
-		//}
-
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		//Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		//if (direction != Vector2.Zero)
-		//{
-		//	velocity.X = direction.X * Speed;
-		//}
-		//else
-		//{
-		//	velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-		//}
-
-		//Velocity = velocity;
-		//MoveAndSlide();
 	}
 }
