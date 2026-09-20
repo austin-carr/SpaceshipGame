@@ -1,20 +1,17 @@
 using Godot;
 using System;
 
-public partial class Projectile : Area2D
+public partial class Asteroid : Area2D
 {
 	[Export]
-	public CollisionShape2D CollisionShape2D { get; set; }
-	[Export]
-	public Sprite2D Sprite2D { get; set; }
-	[Export]
-	public float Speed { get; set; } = 200.0f;
-	
-	public Vector2 Direction { get; set; } = Vector2.Right;
-	
+	public float Speed { get; set; } = 100.0f;
+
+	public Vector2 Direction { get; set; } = Vector2.Left;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		BodyEntered += OnBodyEntered;
 		AreaEntered += OnAreaEntered;
 	}
 
@@ -23,12 +20,17 @@ public partial class Projectile : Area2D
 	{
 		Position += Direction * Speed * (float)delta;
 	}
-	
+
 	private void OnVisibleOnScreenNotifier2DScreenExited()
 	{
 		QueueFree();
 	}
-	
+
+	private void OnBodyEntered(Node2D body)
+	{
+		QueueFree();
+	}
+
 	private void OnAreaEntered(Area2D area)
 	{
 		QueueFree();

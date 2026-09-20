@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cm1mi34ihx438"]
+
+[ext_resource type="Script" uid="uid://dix3hqgbnc24g" path="res://spawners/AsteroidSpawner.cs" id="1_4bqkf"]
+
+[node name="AsteroidSpawner" type="Timer" unique_id=1557575144]
+script = ExtResource("1_4bqkf")

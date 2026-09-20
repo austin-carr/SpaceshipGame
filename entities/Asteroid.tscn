@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://4bu4iehvytbl"]
+
+[ext_resource type="Script" uid="uid://c48syelkb3oue" path="res://entities/Asteroid.cs" id="1_11ekk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2i1rd"]
+radius = 19.0
+
+[node name="Asteroid" type="Area2D" unique_id=1229607472]
+script = ExtResource("1_11ekk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=612431235]
+shape = SubResource("CircleShape2D_2i1rd")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=672797059]
+offset_left = -13.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 13.0
