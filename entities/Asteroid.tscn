@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://4bu4iehvytbl"]
 
 [ext_resource type="Script" uid="uid://c48syelkb3oue" path="res://entities/Asteroid.cs" id="1_11ekk"]
+[ext_resource type="Texture2D" uid="uid://cg0k7wknrlxm1" path="res://sprites/asteroid.png" id="2_ilay8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2i1rd"]
-radius = 19.0
+radius = 16.0
 
 [node name="Asteroid" type="Area2D" unique_id=1229607472]
 script = ExtResource("1_11ekk")
@@ -11,15 +12,14 @@ script = ExtResource("1_11ekk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=612431235]
 shape = SubResource("CircleShape2D_2i1rd")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=672797059]
-offset_left = -13.0
-offset_top = -14.0
-offset_right = 14.0
-offset_bottom = 13.0
-
 [node name="Label" type="Label" parent="." unique_id=1615421478]
-offset_left = 14.0
-offset_top = -12.0
-offset_right = 106.0
-offset_bottom = 11.0
+visible = false
+offset_left = 17.0
+offset_top = -7.0
+offset_right = 75.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 10
 text = "Initial Value"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2112820509]
+texture = ExtResource("2_ilay8")

@@ -12,7 +12,7 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public PackedScene ProjectileScene { get; set; }
 	[Export]
-	public float FireRate { get; set; } = 0.5f;
+	public float FireRate { get; set; } = 0.25f;
 	
 	private Marker2D _muzzle;
 	private bool _canShoot = true;
