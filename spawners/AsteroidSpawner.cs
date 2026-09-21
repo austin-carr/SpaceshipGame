@@ -37,23 +37,23 @@ public partial class AsteroidSpawner : Timer
 	private void SpawnAsteroid()
 	{
 		Asteroid asteroidInstance = AsteroidScene.Instantiate<Asteroid>();
-
-		// Randomly position the asteroid at the top of the screen
-		float screenWidth = GetViewport().GetVisibleRect().Size.X;
-		float randomY = (float)GD.RandRange(0, GetViewport().GetVisibleRect().Size.Y);
-
+		
+		var label = asteroidInstance.GetNode<Label>("Label");
+		
 		Camera2D camera = GetViewport().GetCamera2D();
 		Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
 		Vector2 viewSize = viewportSize / camera.Zoom;
-
 		float cameraTop = camera.GlobalPosition.Y - (viewSize.Y / 2.0f);
 		float cameraBottom = camera.GlobalPosition.Y + (viewSize.Y / 2.0f);
-			
-
+		
+		float randY = (float)GD.RandRange(cameraBottom - 30, cameraTop + 30);
+		
 		asteroidInstance.Position = new Vector2(
 			GetViewport().GetVisibleRect().Size.X / 2 - 10f,
-			randomY
+			randY
 		);
+		
+		label.Text = $"X {GetViewport().GetVisibleRect().Size.X / 2 - 10f}, Y {randY}";
 
 		GetTree().CurrentScene.AddChild(asteroidInstance);
 	}
