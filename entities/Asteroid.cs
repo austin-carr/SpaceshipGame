@@ -16,6 +16,7 @@ public partial class Asteroid : Area2D
 		BodyEntered += OnBodyEntered;
 		AreaEntered += OnAreaEntered;
 		_label = GetNode<Label>("Label");
+		AddToGroup("asteroid");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,6 +32,9 @@ public partial class Asteroid : Area2D
 
 	private void OnBodyEntered(Node2D body)
 	{
+		if (body is Player character)
+			character.OnCollision();
+		
 		QueueFree();
 	}
 

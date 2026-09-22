@@ -4,7 +4,9 @@ using System;
 public partial class Player : CharacterBody2D
 {
 	[Export]
-	public float Speed = 375.0f;
+	public int NumberOfLives { get; set; } = 3;
+	[Export]
+	public float Speed { get; set; } = 375.0f;
 	[Export]
 	public float StopDistance { get; set; } = 5.0f;
 	[Export]
@@ -28,6 +30,19 @@ public partial class Player : CharacterBody2D
 		_shootCooldownTimer.Timeout += () => _canShoot = true;
 		
 		AddChild(_shootCooldownTimer);
+		AddToGroup("Player");
+	}
+	
+	public void OnCollision()
+	{
+		NumberOfLives--;
+		
+		if (NumberOfLives < 1)
+		{
+			GetTree().Paused = true;
+			var deathLabel = GetNode<Label>("../Label");
+			deathLabel.Visible = true;
+		}
 	}
 	
 	public override void _UnhandledInput(InputEvent @event)

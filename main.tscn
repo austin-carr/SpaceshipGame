@@ -15,3 +15,13 @@ ProjectileScene = ExtResource("2_0xm2m")
 
 [node name="AsteroidSpawner" parent="." unique_id=1557575144 instance=ExtResource("3_1bvp3")]
 AsteroidScene = ExtResource("4_lquwl")
+
+[node name="Label" type="Label" parent="." unique_id=672681937]
+visible = false
+offset_left = -319.0
+offset_top = -181.0
+offset_right = 319.0
+offset_bottom = 180.0
+text = "You Died"
+horizontal_alignment = 1
+vertical_alignment = 1
