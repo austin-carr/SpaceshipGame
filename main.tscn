@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://drhwchfiyrb6"]
 
-[ext_resource type="PackedScene" uid="uid://bt7mkd36f3ih4" path="res://entities/Player.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://ctyvsoonbj3hl" path="res://entities/Projectile.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://cm1mi34ihx438" path="res://spawners/AsteroidSpawner.tscn" id="3_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://4bu4iehvytbl" path="res://entities/Asteroid.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://bt7mkd36f3ih4" path="res://Entity/Character/Player/Player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ctyvsoonbj3hl" path="res://Entity/Projectile/PlayerProjectile/Projectile.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cm1mi34ihx438" path="res://Entity/Spawner/AsteroidSpawner/AsteroidSpawner.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://4bu4iehvytbl" path="res://Entity/Object/Asteroid/Asteroid.tscn" id="4_lquwl"]
 
 [node name="Main" type="Node2D" unique_id=1535955932]
 
@@ -16,7 +16,7 @@ ProjectileScene = ExtResource("2_0xm2m")
 [node name="AsteroidSpawner" parent="." unique_id=1557575144 instance=ExtResource("3_1bvp3")]
 AsteroidScene = ExtResource("4_lquwl")
 
-[node name="Label" type="Label" parent="." unique_id=672681937]
+[node name="DeathLabel" type="Label" parent="." unique_id=672681937]
 visible = false
 offset_left = -319.0
 offset_top = -181.0

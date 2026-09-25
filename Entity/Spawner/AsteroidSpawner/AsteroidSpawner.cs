@@ -4,25 +4,27 @@ using System;
 public partial class AsteroidSpawner : Timer
 {
 	[Export]
-	public PackedScene AsteroidScene { get; set; }
-	[Export]
 	public float SpawnInterval { get; set; } = 1.0f;
+	[Export]
+	public PackedScene AsteroidScene { get; set; }
 
 	private float _timeSinceLastSpawn = 0.0f;
-
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if (AsteroidScene == null)
 		{
+			// TODO: Error handling
 			return;
 		}
 
+		HandleAsteroidSpawn((delta));
+	}
+
+	// This could probably be better achieved by changing to a Timer node and using the timeout signal, but this works for now
+	private void HandleAsteroidSpawn(double delta)
+	{
 		if (_timeSinceLastSpawn >= SpawnInterval)
 		{
 			SpawnAsteroid();

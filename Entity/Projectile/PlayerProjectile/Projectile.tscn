@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ctyvsoonbj3hl"]
 
-[ext_resource type="Script" uid="uid://bfhp003it6nvk" path="res://entities/Projectile.cs" id="1_jfshl"]
-[ext_resource type="Texture2D" uid="uid://c5ifslo8lrdjd" path="res://sprites/Projectile.png" id="2_jnjrb"]
+[ext_resource type="Script" uid="uid://bfhp003it6nvk" path="res://Entity/Projectile/PlayerProjectile/Projectile.cs" id="1_jfshl"]
+[ext_resource type="Texture2D" uid="uid://c5ifslo8lrdjd" path="res://Sprites/Projectile.png" id="2_jnjrb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2i1rd"]
 radius = 3.0

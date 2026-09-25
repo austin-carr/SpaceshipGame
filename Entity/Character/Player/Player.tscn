@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bt7mkd36f3ih4"]
 
-[ext_resource type="Script" uid="uid://uhvuyisvqvmc" path="res://entities/Player.cs" id="1_b0kkn"]
-[ext_resource type="Texture2D" uid="uid://c3gr10l7my3r1" path="res://sprites/Spaceship.png" id="1_merdl"]
+[ext_resource type="Script" uid="uid://uhvuyisvqvmc" path="res://Entity/Character/Player/Player.cs" id="1_b0kkn"]
+[ext_resource type="Texture2D" uid="uid://c3gr10l7my3r1" path="res://Sprites/Spaceship.png" id="1_merdl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tkfi1"]
 radius = 13.0
@@ -14,18 +14,18 @@ height = 22.0
 [node name="Player" type="CharacterBody2D" unique_id=1657702218]
 script = ExtResource("1_b0kkn")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=34525177]
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=34525177]
 texture = ExtResource("1_merdl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1030581880]
+[node name="BodyCollisionShape" type="CollisionShape2D" parent="." unique_id=1030581880]
 position = Vector2(-7, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_tkfi1")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=433587251]
+[node name="NoseCollisionShape" type="CollisionShape2D" parent="." unique_id=433587251]
 position = Vector2(11, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_s5du5")
 
-[node name="MuzzleMarker2D" type="Marker2D" parent="." unique_id=255231077]
+[node name="MuzzleMarker" type="Marker2D" parent="." unique_id=255231077]
 position = Vector2(22, 0)

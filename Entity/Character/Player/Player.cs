@@ -10,37 +10,37 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public float StopDistance { get; set; } = 5.0f;
 	[Export]
+	public float FireRate { get; set; } = 0.25f;
+	[Export]
 	public float ScreenPadding { get; set; } = 32.0f; 
 	[Export]
 	public PackedScene ProjectileScene { get; set; }
-	[Export]
-	public float FireRate { get; set; } = 0.25f;
-	
+
 	private Marker2D _muzzle;
 	private bool _canShoot = true;
 	private Timer _shootCooldownTimer;
 	
 	public override void _Ready()
 	{
-		_muzzle = GetNode<Marker2D>("MuzzleMarker2D");
+		AddToGroup("Player");
+		_muzzle = GetNode<Marker2D>("MuzzleMarker");
 		
 		_shootCooldownTimer = new Timer();
 		_shootCooldownTimer.WaitTime = FireRate;
 		_shootCooldownTimer.OneShot = true;
 		_shootCooldownTimer.Timeout += () => _canShoot = true;
-		
-		AddChild(_shootCooldownTimer);
-		AddToGroup("Player");
+		AddChild(_shootCooldownTimer);	
 	}
 	
 	public void OnCollision()
 	{
 		NumberOfLives--;
 		
+		// This needs to be adjusted to handle correctly, just for testing purposes currently
 		if (NumberOfLives < 1)
 		{
 			GetTree().Paused = true;
-			var deathLabel = GetNode<Label>("../Label");
+			var deathLabel = GetNode<Label>("../DeathLabel");
 			deathLabel.Visible = true;
 		}
 	}
@@ -57,10 +57,11 @@ public partial class Player : CharacterBody2D
 	{
 		if (ProjectileScene == null)
 		{
-			// TODO: Error
+			// TODO: Error handling
 			return;
 		}
 		
+		// This could probably be cleaned up
 		_canShoot = false;
 		_shootCooldownTimer.Start();
 		
